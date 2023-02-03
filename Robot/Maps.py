@@ -6,20 +6,21 @@ author : theotime Perrichet
 -Ce code définit une classe  qui fait des opérations arithmétiques avec des complexes
 """
 
-#we create a Grid
-#We use a 1 in the grid to represent the presence of a robot. At the beginning the robot is at position 0,0 of the grid. 
-#The methods allow to move the robot. In case of impossibility to move (presence of an edge) the robot stays at its place. 
-# The call of the method returns True if the move is possible and False in the opposite case.   
-#The method display allows to display the grid.
-
 class Grid:
     def __init__(self, nb_lines, nb_columns):
+        # Initialise the grid with nb_lines lines and nb_columns columns
         self.nb_lines = nb_lines
         self.nb_columns = nb_columns
         self.grid = [[0 for i in range(nb_lines)] for j in range(nb_columns)]
+        # Put a 1 on the first cell of the grid
         self.grid[0][0] = 1
+        # Initialise the position of the robot
         self.x = 0
         self.y = 0
+        #the grid cannot depass 50 lines and 50 columns
+        if self.nb_lines > 20 or self.nb_columns > 20:
+            raise ValueError("The grid cannot have more than 50 lines or 50 columns")
+
 
     def move_up(self):
         if self.y == 0:
@@ -64,7 +65,7 @@ class Grid:
 
 
 if __name__=="__main__":
-    grid = Grid(10,10)
+    grid = Grid(20,20)
     grid.display()
     grid.move_up()
     grid.display()
@@ -74,4 +75,3 @@ if __name__=="__main__":
     grid.display()
     grid.move_left()
     grid.display()
-    
